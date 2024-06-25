@@ -1,0 +1,8 @@
+@EndUserText.label: 'service defnition'
+define service ZC_PURCHASEHEADER_TP_UM_SD {
+  expose ZC_PURCHASEHEADER_TP_UM;
+  expose ZC_PURCHASE_ITEAM_TP_UM;
+  expose ZC_PO_TYPE;
+  expose ZC_PO_STATUS;
+  expose ZC__SUPPLIER;
+}

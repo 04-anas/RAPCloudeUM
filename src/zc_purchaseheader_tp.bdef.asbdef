@@ -1,0 +1,35 @@
+projection;
+strict ( 2 );
+use draft;
+define behavior for ZC_PURCHASEHEADER_TP //alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+  use action copy;
+  use action withdrawApproval;
+  use association _PurchaseItem { create; with draft; }
+  use association _Po_attachment { create; with draft; }
+  // for draft feature
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+}
+
+define behavior for ZC_PURCHASE_ITEAM_TP //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _PurchaseHeader{ with draft;}
+}
+define behavior for ZC_PO_ATTACHMENT1_TP //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _PurchaseHeader{ with draft;}
+}

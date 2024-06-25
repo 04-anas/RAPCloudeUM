@@ -1,0 +1,27 @@
+unmanaged implementation in class zbp_i_purchaseheader_tp_um unique;
+strict ( 2 );
+
+define behavior for ZI_PURCHASEHEADER_TP_UM //alias <alias_name>
+//late numbering
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  field ( readonly ) PurchaseOrderNumber;
+  association _PurchaseItem { create; }
+}
+
+define behavior for ZI_PURCHASE_ITEAM_TP_UM //alias <alias_name>
+//late numbering
+lock dependent by _PurchaseHeader
+authorization dependent by _PurchaseHeader
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) PurchaseOrderNumber, PurchaseIteam;
+  association _PurchaseHeader;
+}

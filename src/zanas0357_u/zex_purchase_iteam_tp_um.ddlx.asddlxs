@@ -1,0 +1,74 @@
+@Metadata.layer: #CUSTOMER
+@UI.headerInfo: {
+//    imageUrl: 'Imageurl',
+    typeName: 'Manage Purchase Order Item', // it show for particular iteam
+    typeNamePlural: 'Purchase Orders Item', // it show as a heading
+//   title:{ value: 'Description' } , // header of object page
+    description: {
+
+        label: 'Manage Purchase Order Item',
+        type: #STANDARD
+//        value: 'OrderType'  // show with heder object page
+
+    }
+}
+
+annotate entity ZC_PURCHASE_ITEAM_TP_UM with
+
+
+{
+
+  @UI.facet: [{
+  id: 'itemData',
+  type: #IDENTIFICATION_REFERENCE,
+  label: 'Item Info',
+  position: 10,
+  purpose: #STANDARD
+
+   }]
+
+  @UI.lineItem: [{position: 5 ,label:'Purchase Order Number' , importance: #HIGH }]
+  @UI.identification: [{ position: 10 ,label: 'PO Number' }]
+  PurchaseOrderNumber;
+  @UI.identification: [{ position: 20 ,label: 'PO Item No' }]
+  @UI.lineItem: [{position: 10 ,label:'Purchase Item' , importance: #HIGH }]
+  PurchaseIteam;
+  @UI.lineItem: [{position: 10 ,label:'Short Text' , importance: #HIGH }]
+  @UI.identification: [{ position: 30 ,label: 'Short Text' }]
+  ShortText;
+  @UI.lineItem: [{position: 20 ,label:'Material' , importance: #HIGH }]
+  @UI.identification: [{ position: 40 ,label: 'Material' }]
+  Material;
+  @UI.lineItem: [{position: 30 ,label:'Plant' }]
+  @UI.identification: [{ position: 50 ,label: 'Plant' }]
+  Plant;
+  //    @UI.lineItem: [{position: 40 ,label:'Order Type' , importance: #HIGH }]
+  //   OrderType;
+  //   Supplier;
+  @UI.lineItem: [{position: 50 ,label:'Material Group' , importance: #HIGH }]
+  @UI.identification: [{ position: 60 ,label: 'Material Group' }]
+  MaterialGroup;
+  @UI.lineItem: [{position: 60 ,label:'Order Quntity' , importance: #HIGH }]
+  @UI.identification: [{ position: 70 ,label: 'Order Quntity' }]
+  OrderQunty;
+  @UI.lineItem: [{position: 70 ,label:'Order Unit' , importance: #HIGH }]
+  @UI.identification: [{ position: 80 ,label: 'Order Unit' }]
+  OrderUnit;
+  @UI.lineItem: [{position: 80 ,label:'Product Price' , importance: #HIGH }]
+  @UI.identification: [{ position: 85 ,label: 'Product Price' }]
+  ProductPrice;
+  //    @UI.lineItem: [{position: 90 ,label:'Product Price Unit'  }]
+  //   PriceUnit;
+  @UI.lineItem: [{position: 100 ,label:'Iteam Toatal Price'  }]
+  @UI.identification: [{ position: 90 ,label: 'Item Total Price' }]
+  IteamPrice;
+  //    @UI.lineItem: [{position: 110 ,label:'Purchase Order' , importance: #HIGH }]
+  //   LocalLastChangedBy;
+  /* Associations */
+  //   _Currency;
+  //   _OrderType;
+  //   _PurchaseHeader;
+  //   _status;
+  //   _suplier;
+
+}

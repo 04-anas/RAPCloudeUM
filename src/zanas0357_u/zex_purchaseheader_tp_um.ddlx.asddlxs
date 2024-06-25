@@ -1,0 +1,201 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: {
+    imageUrl: 'Imageurl',
+    typeName: 'Manage Purchase Order', // it show for particular iteam
+    typeNamePlural: 'Purchase Order', // it show as a heading
+   title:{ value: 'Description' } , // header of object page
+    description: {
+
+        label: 'Manage Purchase Order',
+        type: #STANDARD ,
+        value: 'OrderType'  // show with heder object page
+
+    }
+}
+annotate entity ZC_PURCHASEHEADER_TP_UM with
+{
+  //==============================================================================================//
+  @UI.facet: [
+  {
+  id: 'Collectionid',
+  purpose:#STANDARD,
+  type: #COLLECTION, //collection
+  label: 'Gernal Information'
+   },
+  {
+  id: 'BasicInfo',
+  purpose:#STANDARD,
+  parentId: 'Collectionid',
+  position: 10 ,
+  targetQualifier: 'BasicGroup',
+  type: #FIELDGROUP_REFERENCE ,
+   label: 'Basic Data'
+   },
+  {
+  id: 'OrgnInfo',
+  purpose:#STANDARD,
+  parentId: 'Collectionid',
+  position: 20 ,
+  targetQualifier: 'OrgGroup',
+  type: #FIELDGROUP_REFERENCE,
+  label: 'Organization Data Data'
+   } ,
+   {
+  id: 'PriceInfo',
+  purpose:#STANDARD,
+  parentId: 'Collectionid',
+  position: 30 ,
+  targetQualifier: 'Overallprice',
+  type: #FIELDGROUP_REFERENCE,
+  label: 'Over All Price'
+   } ,
+         {
+   id : 'suplierInfo',
+   purpose: #STANDARD,
+   type:#LINEITEM_REFERENCE,
+   position: 30,
+   targetElement: '_suplier' ,
+   label: 'Suplier Details'
+   },
+
+   {
+   id : 'IteamInfo',
+   purpose: #STANDARD,
+   type:#LINEITEM_REFERENCE,
+   position: 20,
+   targetElement: '_PurchaseItem' ,
+   label: 'Purchase Item'
+   },
+
+     {
+        id : 'Header1',
+        purpose: #HEADER,
+        type: #DATAPOINT_REFERENCE,
+        targetQualifier: 'OrderDate',
+        position:  10
+    },
+        {
+        id : 'Header2',
+        purpose: #HEADER,
+        type: #DATAPOINT_REFERENCE,
+        targetQualifier: 'TotalPrice',
+        position:  20
+      },
+//       {
+//        id : 'Header3',
+//        purpose: #HEADER,
+//        type: #DATAPOINT_REFERENCE,
+//        targetQualifier: 'Unit',
+//        position:  30
+//      },
+       {
+        id : 'Header4',
+        purpose: #HEADER,
+        type: #DATAPOINT_REFERENCE,
+        targetQualifier: 'Status',
+        position:  40
+      }
+   ]
+   //==============================================================================================//
+    //  to provide labeling of field
+  @UI.lineItem: [{position: 10 ,label:'Purchase Order Number' , importance: #HIGH } 
+//               { dataAction: 'copy' ,label: 'Copy', type: #FOR_ACTION,position: 10 },
+//               { dataAction: 'withdrawApproval' ,label: 'withdrawApproval', type: #FOR_ACTION,position: 20 } 
+]
+  // to provide searchelp on top
+  @UI.selectionField: [{  position: 10}]
+  //  @UI.identification: [{position: 10 ,label: 'Purchase  Order number', valueQualifier: 'Basic Group'  }]
+
+  // TO CREATE SUBGROUPE IN GERNAL INFO
+  @UI.fieldGroup: [{position: 10 ,label:'Purchase Order Number' , qualifier:'BasicGroup' }]
+  PurchaseOrderNumber;
+
+
+  //  @UI.lineItem: [{position: 20 ,label:'PO Description'  }]
+  // to provide searchelp on top
+  //  @UI.selectionField: [{  position: 20 }]
+   @UI.fieldGroup: [{position: 15 ,label:'Description' , qualifier:'BasicGroup' }]
+    Description;
+
+  //
+  //  @UI.dataPoint:{title: 'Price Unit'  , qualifier: 'Unit' } //  showing header level data
+  //  @UI.identification: [{position: 10 ,label: 'Purchase  Order Unit' , valueQualifier: 'BasicGroup' }]
+  //  @UI.fieldGroup: [{position: 20 ,label:'Purchase  Order Unit' , qualifier:'BasicGroup' }]
+  //  @UI.lineItem: [{position: 35 ,label:'Price Unit'  }]
+  //  priceunit;
+
+
+
+
+  @UI.selectionField: [{  position: 20 }]
+  //  @UI.lineItem: [{position: 37 ,label:'Status Description'  }]
+  statusdescription;
+
+  @UI.dataPoint:{   title: 'Total Purchase Order Price'  , qualifier: 'TotalPrice'  }
+  @UI.identification: [{position: 10 ,label: 'Purchase Order Total Price',qualifier: 'TotalPrice'  }]
+  @UI.fieldGroup: [{position: 30 ,label:'Purchase Order Total Price' , qualifier:'Overallprice' }]
+  PurchaseTotalPrice;
+
+
+
+  @UI.lineItem: [{position: 38 ,label:'Order Type'  }]
+   // to provide searchelp on top
+  //  @UI.selectionField: [{  position: 30}]
+  @UI.fieldGroup: [{position: 40 ,label:'Purchase Order Type' , qualifier:'BasicGroup' }]
+  OrderType;
+
+
+
+
+  // @UI.identification: [{position: 10 ,label: 'CompnyCode', valueQualifier: 'OrgGroup'  }]
+  @UI.fieldGroup: [{position: 10 ,label:'Compny Code' , qualifier:'OrgGroup' }]
+  @UI.lineItem: [{position: 40 ,label: ' Compny Code'  }]
+  // to provide searchelp on top
+  //  @UI.selectionField: [{  position: 40}]
+  CompnyCode;
+
+
+  @UI.fieldGroup: [{position: 10 ,label:'Organization' , qualifier:'OrgGroup' }]
+  @UI.lineItem: [{position: 50 ,label: 'Organization'  }]
+  // to provide searchelp on top
+  // @UI.selectionField: [{  position: 10}]
+  Organization;
+
+ @UI.fieldGroup: [{position: 15 ,label:'Supplier ID' , qualifier:'OrgGroup' }]
+   @UI.identification: [{position: 22 ,label: 'Suplier', valueQualifier: 'OrgGroup'  }]
+  @UI.lineItem: [{position: 60 ,label: 'Supplier Id',importance: #HIGH }] //, type: #AS_CONTACT ,value: '_suplier' line iteam with contact detailse
+   // to provide searchelp on top
+  @UI.selectionField: [{  position: 55}]
+  Supplier_id;
+
+  @UI.dataPoint:{title: 'PO Status'  , qualifier: 'Status', criticality: 'criticalvalue' }
+  @UI.lineItem: [{position: 70 ,label: 'PO Status' ,importance: #HIGH , criticality: 'criticalvalue'  }]
+   @UI.fieldGroup: [{position: 35 ,label:'PO Status' , qualifier:'BasicGroup' }]
+  // to provide searchelp on top
+  //  @UI.selectionField: [{  position: 60}]
+  // @UI.identification: [{position: 10 }]
+  
+  po_status;
+
+  //    @UI.lineItem: [{position: 20 ,label: 'Image Url' ,importance: #HIGH }]
+  //   Imageurl;
+  //    @UI.lineItem: [{position: 20 ,label: 'Creatted By' ,importance: #HIGH }]
+  //   CreateBy;
+  //  @UI.lineItem: [{position: 70 ,label: 'Created On Time'  }]
+
+  @UI.dataPoint:{title: 'Created date'  , qualifier: 'OrderDate' }
+  CreatedDateTime;
+  //  @UI.lineItem: [{position: 80 ,label: 'Image' , importance: #HIGH }]
+  //  Imageurl;
+  //    @UI.lineItem: [{position: 20 ,label: 'Last Change' ,importance: #HIGH }]
+  //   ChangedDateTime;
+  //    @UI.lineItem: [{position: 20 ,label: 'Local Last Change' ,importance: #HIGH }]
+  //   LocalLastChangedBy;
+  //
+  //   /* Associations */
+  //   _OrderType;
+  //   _PurchaseIteam;
+  //   _suplier;
+
+}
